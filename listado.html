@@ -13,12 +13,13 @@
     <h1>Listado de productos</h1>
     <h4>Aquí encontrarás todos tus productos</h4>
     <table> <!-- Se crea una tabla para mostrar los productos. -->
-        <thead> <!--Encabezado de la tabla con columnas para código, descripción, cantidad, precio y acciones.-->
+        <thead> <!--Encabezado de la tabla con columnas para código, descripción, cantidad, precio, precio de oferta y acciones.-->
             <tr>
                 <th>Código</th>
                 <th>Descripción</th>
                 <th>Cantidad</th>                
                 <th align="right">Precio</th>
+                <th align="right">Precio Oferta</th>
                 <th>Imagen</th>
                 <th align="right">Categoria</th>
                 
@@ -59,8 +60,9 @@
                     let fila = document.createElement('tr'); //Crea una nueva fila de tabla (<tr>) para cada producto.
                     fila.innerHTML = '<td>' + producto.codigo + '</td>' +
                         '<td>' + producto.descripcion + '</td>' +
-                        '<td align="right">' + producto.cantidad + '</td>' +
-                        '<td align="right">' + producto.precio + '</td>' +
+                        '<td align="center">' + producto.cantidad + '</td>' +
+                        '<td align="center">' + producto.precio + '</td>' +
+                        '<td align="center">' + producto.precio_oferta + '</td>' +
                         // Mostrar miniatura de la imagen
                         '<td><img src=./static/imagenes/' + producto.imagen_url +' alt="Imagen del producto" style="width: 100px;"></td>' + '<td align="right">' + producto.categoria + '</td>';
                         

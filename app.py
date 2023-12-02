@@ -52,6 +52,7 @@ class Catalogo:
             descripcion VARCHAR(255) NOT NULL,
             cantidad INT NOT NULL,
             precio DECIMAL(10, 2) NOT NULL,
+            precio_oferta DECIMAL(10, 2) NOT NULL,
             imagen_url VARCHAR(255),
             categoria VARCHAR(255))''')
         self.conn.commit()
@@ -61,7 +62,7 @@ class Catalogo:
         self.cursor = self.conn.cursor(dictionary=True)
         
     #----------------------------------------------------------------
-    def agregar_producto(self, codigo, descripcion, cantidad, precio, imagen, categoria):
+    def agregar_producto(self, codigo, descripcion, cantidad, precio, precio_oferta, imagen, categoria):
         # Verificamos si ya existe un producto con el mismo código
         self.cursor.execute(f"SELECT * FROM productos WHERE codigo = {codigo}")
         producto_existe = self.cursor.fetchone()
@@ -69,8 +70,8 @@ class Catalogo:
             return False
 
         
-        sql = "INSERT INTO productos (codigo, descripcion, cantidad, precio, imagen_url, categoria) VALUES (%s, %s, %s, %s, %s, %s)"
-        valores = (codigo, descripcion, cantidad, precio, imagen, categoria)
+        sql = "INSERT INTO productos (codigo, descripcion, cantidad, precio, precio_oferta, imagen_url, categoria) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        valores = (codigo, descripcion, cantidad, precio, precio_oferta, imagen, categoria)
 
         self.cursor.execute(sql, valores)        
         self.conn.commit()
@@ -83,9 +84,9 @@ class Catalogo:
         return self.cursor.fetchone()
 
     #----------------------------------------------------------------
-    def modificar_producto(self, codigo, nueva_descripcion, nueva_cantidad, nuevo_precio, nueva_imagen, nuevo_categoria):
-        sql = "UPDATE productos SET descripcion = %s, cantidad = %s, precio = %s, imagen_url = %s, categoria = %s WHERE codigo = %s"
-        valores = (nueva_descripcion, nueva_cantidad, nuevo_precio, nueva_imagen, nuevo_categoria, codigo)
+    def modificar_producto(self, codigo, nueva_descripcion, nueva_cantidad, nuevo_precio, nuevo_precio_oferta , nueva_imagen, nuevo_categoria):
+        sql = "UPDATE productos SET descripcion = %s, cantidad = %s, precio = %s, precio_oferta = %s, imagen_url = %s, categoria = %s WHERE codigo = %s"
+        valores = (nueva_descripcion, nueva_cantidad, nuevo_precio, nuevo_precio_oferta, nueva_imagen, nuevo_categoria, codigo)
         self.cursor.execute(sql, valores)
         self.conn.commit()
         return self.cursor.rowcount > 0
@@ -113,6 +114,7 @@ class Catalogo:
             print(f"Descripción: {producto['descripcion']}")
             print(f"Cantidad...: {producto['cantidad']}")
             print(f"Precio.....: {producto['precio']}")
+            print(f"Precio_oferta.....: {producto['precio_oferta']}")
             print(f"Imagen.....: {producto['imagen_url']}")
             print(f"categoria..: {producto['categoria']}")
             print("-" * 40)
@@ -176,6 +178,7 @@ def agregar_producto():
     descripcion = request.form['descripcion']
     cantidad = request.form['cantidad']
     precio = request.form['precio']
+    precio_oferta = request.form['precio_oferta']
     imagen = request.files['imagen']
     categoria = request.form['categoria']  
     nombre_imagen=""
@@ -189,7 +192,7 @@ def agregar_producto():
         nombre_imagen = f"{nombre_base}_{int(time.time())}{extension}" #Genera un nuevo nombre para la imagen usando un timestamp, para evitar sobreescrituras y conflictos de nombres.
         
         #Se agrega el producto a la base de datos
-        if  catalogo.agregar_producto(codigo, descripcion, cantidad, precio, nombre_imagen, categoria):
+        if  catalogo.agregar_producto(codigo, descripcion, cantidad, precio, precio_oferta, nombre_imagen, categoria):
             imagen.save(os.path.join(RUTA_DESTINO, nombre_imagen))
 
             #Si el producto se agrega con éxito, se devuelve una respuesta JSON con un mensaje de éxito y un código de estado HTTP 201 (Creado).
@@ -214,6 +217,7 @@ def modificar_producto(codigo):
     nueva_descripcion = request.form.get("descripcion")
     nueva_cantidad = request.form.get("cantidad")
     nuevo_precio = request.form.get("precio")
+    nuevo_precio_oferta = request.form.get("precio_oferta")
     nuevo_categoria = request.form.get("categoria")
     imagen = request.files['imagen']
 
@@ -234,7 +238,7 @@ def modificar_producto(codigo):
             os.remove(ruta_imagen)
     
     # Se llama al método modificar_producto pasando el codigo del producto y los nuevos datos.
-    if catalogo.modificar_producto(codigo, nueva_descripcion, nueva_cantidad, nuevo_precio, nombre_imagen, nuevo_categoria):
+    if catalogo.modificar_producto(codigo, nueva_descripcion, nueva_cantidad, nuevo_precio, nuevo_precio_oferta, nombre_imagen, nuevo_categoria):
         #La imagen se guarda en el servidor.
         imagen.save(os.path.join(RUTA_DESTINO, nombre_imagen))
 

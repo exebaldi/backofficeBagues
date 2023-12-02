@@ -25,7 +25,10 @@
         <input type="number" id="cantidad" name="cantidad" required><br>
 
         <label for="precio">Precio:</label>
-        <input type="number" step="0.01" id="precio" name="precio" required><br>
+        <input type="number" step="1" id="precio" name="precio" required><br>
+
+        <label for="precio_oferta">Precio oferta:</label>
+        <input type="number" step="1" id="precio_oferta" name="precio_oferta" required><br>
 
         <label for="imagenProducto">Imagen del producto:</label>
         <input type="file" id="imagenProducto" name="imagen">
@@ -54,6 +57,7 @@
             formData.append('descripcion', document.getElementById('descripcion').value);
             formData.append('cantidad', document.getElementById('cantidad').value);
             formData.append('precio', document.getElementById('precio').value);
+            formData.append('precio_oferta', document.getElementById('precio_oferta').value);
             formData.append('imagen', document.getElementById('imagenProducto').files[0]);
             formData.append('categoria', document.getElementById('categoriaProducto').value);
             
@@ -91,6 +95,7 @@
                     document.getElementById('descripcion').value = "";
                     document.getElementById('cantidad').value = "";
                     document.getElementById('precio').value = "";
+                    document.getElementById('precio_oferta').value = "";
                     document.getElementById('imagenProducto').value = "";
                     document.getElementById('categoriaProducto').value = "";
                 });

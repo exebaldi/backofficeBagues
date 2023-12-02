@@ -33,7 +33,10 @@
                 <input type="number" id="cantidadModificar" v-model="cantidad" required><br>
 
                 <label for="precioModificar">Precio:</label>
-                <input type="number" step="0.01" id="precioModificar" v-model="precio" required><br>
+                <input type="number" step="1" id="precioModificar" v-model="precio" required><br>
+
+                <label for="precio_ofertaModificar">Precio Oferta:</label>
+                <input type="number" step="1" id="precio_ofertaModificar" v-model="precio_oferta" required><br>
 
                 <!-- Imagen actual del producto -->
                 <img v-if="imagen_url && !imagenSeleccionada" :src="'./static/imagenes/' + imagen_url"
@@ -80,6 +83,7 @@
                     descripcion: '',
                     cantidad: '',
                     precio: '',
+                    precio_oferta: '',
                     categoria: '',
                     imagen_url: '',
                     imagenSeleccionada: null,
@@ -110,6 +114,7 @@
                             this.descripcion = data.descripcion;
                             this.cantidad = data.cantidad;
                             this.precio = data.precio;
+                            this.precio_oferta = data.precio_oferta;
                             this.categoria = data.categoria;
                             this.imagen_url =  data.imagen_url;
                             this.mostrarDatosProducto = true;
@@ -136,6 +141,7 @@
                     formData.append('cantidad', this.cantidad);
                     formData.append('categoria', this.categoria);
                     formData.append('precio', this.precio);
+                    formData.append('precio_oferta', this.precio_oferta);
 
                     //Si se ha seleccionado una imagen nueva, la añade al formData. 
                     if (this.imagenSeleccionada) {
@@ -176,6 +182,7 @@
                     this.descripcion = '';
                     this.cantidad = '';
                     this.precio = '';
+                    this.precio_oferta = '';
                     this.imagen_url = '';
                     this.imagenSeleccionada = null;
                     this.imagenUrlTemp = null;
