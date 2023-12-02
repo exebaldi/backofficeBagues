@@ -1,7 +1,7 @@
 /* Estilos para todo el proyecto */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    font-family: Cambria, Cochin, Georgia ;
+    background-color: #f0a8d6;
 }
 
 .contenedor-centrado {
@@ -11,7 +11,7 @@ body {
 }
 
 p {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: Cambria, Cochin, Georgia;
     background-color: #f9f9f9;
     max-width: 400px;
     margin: 0 auto;
@@ -20,15 +20,15 @@ p {
 
 h1, h2, h3, h4, h5, h6 {
     text-align: center;
-    color: #007bff;
+    color: #000000;
 }
 
 form {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
-    background-color: white;
-    border: 1px solid lightslategray;
+    background-color: #c4e9d7;
+    border: 5px solid #f1e0b7;
     border-radius: 5px;
 }
 
@@ -36,8 +36,8 @@ table {
     max-width: 90%;
     margin: 0 auto;
     padding: 20px;
-    background-color: white;
-    border: 1px solid lightslategray;
+    background-color: #c4e9d7;
+    border: 5px solid #f1e0b7;
     border-radius: 5px;
 }
 
@@ -58,37 +58,37 @@ textarea {
 
 input[type="submit"] {
     padding: 10px;
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
+    background-color: #d3c4e9;
+    color: #000000;
+    border: 3px solid #e5d8b8;
     border-radius: 5px;
     cursor: pointer;
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #e5d8b8;
 }
 
 button {
     padding: 8px;
     margin:4px;
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
+    background-color: #d3c4e9;
+    color: #000000;
+    border: 3px solid #e5d8b8;
     border-radius: 5px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #e5d8b8;
 }
 
 a {
     padding: 8px;
     margin:4px;
-    background-color: #fdab13;
-    color: #ffffff;
-    border: none;
+    background-color: #d3c4e9;
+    color: #000000;
+    border: 3px solid #e5d8b8;
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
@@ -96,5 +96,5 @@ a {
 }
 
 a:hover {
-    background-color: #cd7b00;
+    background-color: #e5d8b8;
 }

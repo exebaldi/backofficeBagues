@@ -10,8 +10,8 @@
 </head>
 
 <body>
-    <h1>Modificar Productos del Inventario</h1>
-    <h3>Codo a Codo 2023</h3>
+    <h1>Modificar productos</h1>
+    <h4>¡Personaliza a tu gusto! <br/> Modifica tus productos al instante</h4>
 
     <!-- Contenedor principal que será controlado por Vue.js. Este contenedor tendrá dos formularios. -->
     <div id="app">
@@ -24,7 +24,7 @@
 
         <!-- Segundo formulario: se muestra solo si mostrarDatosProducto es verdadero. Llama a la función guardarCambios -->
         <div v-if="mostrarDatosProducto">
-            <h2>Datos del Producto</h2>
+            <h2>Datos del producto elegido</h2>
             <form @submit.prevent="guardarCambios">
                 <label for="descripcionModificar">Descripción:</label>
                 <input type="text" id="descripcionModificar" v-model="descripcion" required><br>
@@ -53,8 +53,8 @@
                 <input type="file" id="nuevaImagen" @change="seleccionarImagen"><br>
 
                 <br>
-                <label for="proveModificar">Proveedor:</label>
-                <input type="number" id="proveModificar" v-model="proveedor" required><br>
+                <label for="proveModificar">Categoria:</label>
+                <input type="text" id="proveModificar" v-model="categoria" required><br>
 
                 <button type="submit">Guardar Cambios</button>
                 <a href="modificaciones.html">Cancelar</a>
@@ -80,7 +80,7 @@
                     descripcion: '',
                     cantidad: '',
                     precio: '',
-                    proveedor: '',
+                    categoria: '',
                     imagen_url: '',
                     imagenSeleccionada: null,
                     imagenUrlTemp: null,
@@ -110,7 +110,7 @@
                             this.descripcion = data.descripcion;
                             this.cantidad = data.cantidad;
                             this.precio = data.precio;
-                            this.proveedor = data.proveedor;
+                            this.categoria = data.categoria;
                             this.imagen_url =  data.imagen_url;
                             this.mostrarDatosProducto = true;
                         })
@@ -134,7 +134,7 @@
                     formData.append('codigo', this.codigo);
                     formData.append('descripcion', this.descripcion);
                     formData.append('cantidad', this.cantidad);
-                    formData.append('proveedor', this.proveedor);
+                    formData.append('categoria', this.categoria);
                     formData.append('precio', this.precio);
 
                     //Si se ha seleccionado una imagen nueva, la añade al formData. 
